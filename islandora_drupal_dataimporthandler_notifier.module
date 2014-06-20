@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * General hook implementations.
+ */
+
+/**
+ * Implements hook_node_update().
+ */
+function islandora_drupal_dataimporthandler_notifier_node_update($node) {
+  module_load_include('inc', 'islandora_drupal_dataimporthandler_notifier', 'includes/utilities');
+  islandora_drupal_dataimporthandler_notifier_poke_handlers($node);
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function islandora_drupal_dataimporthandler_notifier_node_insert($node) {
+  module_load_include('inc', 'islandora_drupal_dataimporthandler_notifier', 'includes/utilities');
+  islandora_drupal_dataimporthandler_notifier_poke_handlers($node);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function islandora_drupal_dataimporthandler_notifier_menu() {
+  $items = array();
+
+  $items['admin/islandora/search/islandora_solr/drupal_notifier'] = array(
+    'title' => 'DIH Notifier',
+    'description' => 'Configuration for Solr DataImportHandlers.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('islandora_drupal_dataimporthandler_notifier_admin_form'),
+    'access arguments' => array('administer islandora solr'),
+    'file' => 'includes/admin.form.inc',
+    'weight' => 100,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}

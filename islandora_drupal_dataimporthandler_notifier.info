@@ -1,0 +1,6 @@
+name = Islandora Drupal Solr DataImportHandler Notifier
+description = A module to notify Solr DataImportHandlers about changing Drupal content
+package = Islandora Search
+core = "7.x"
+version = "7.x-dev"
+dependencies[] = islandora_solr
