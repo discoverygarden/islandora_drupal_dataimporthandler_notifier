@@ -21,7 +21,7 @@ Enable the relevant DataImportHandlers as necessary as `admin/islandora/search/i
 For an additional ensurance of index consistency, it may be desirable to add a cron job to regularly make the DataImportHandler poll Drupal. Drupal uses DB transactions when saving node content, so we have to somehow make trigger to Solr after the DB is actually updated. Additionally, if an import is already in progress, it is not clearly specified what will happen; assuming the command will be ignore, it is recommended to add a cron job like the following to ensure eventual consistency:
 ```bash
 # Make Solr's DataImportHandler poll Drupal for updated content every 5 minutes.
-*/5 * * * * /usr/bin/wget "http://localhost:8080/solr/dataimport?command=full-import&clean=false"
+*/5 * * * * /usr/bin/wget -O /dev/null "http://localhost:8080/solr/dataimport?command=full-import&clean=false"
 ```
 
 ## Troubleshooting/Issues
