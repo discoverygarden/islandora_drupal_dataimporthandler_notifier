@@ -24,8 +24,6 @@ function islandora_drupal_dataimporthandler_notifier_admin_form($form, &$form_st
     '#default_value' => variable_get('islandora_drupal_dataimporthandler_notifier_handlers', array()),
   );
 
-  dsm($form);
-
   return system_settings_form($form);
 }
 
