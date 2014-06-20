@@ -10,7 +10,7 @@
  */
 function islandora_drupal_dataimporthandler_notifier_node_update($node) {
   module_load_include('inc', 'islandora_drupal_dataimporthandler_notifier', 'includes/utilities');
-  islandora_drupal_dataimporthandler_notifier_poke_handlers($node);
+  islandora_drupal_dataimporthandler_notifier_add_shutdown_handler();
 }
 
 /**
@@ -18,7 +18,23 @@ function islandora_drupal_dataimporthandler_notifier_node_update($node) {
  */
 function islandora_drupal_dataimporthandler_notifier_node_insert($node) {
   module_load_include('inc', 'islandora_drupal_dataimporthandler_notifier', 'includes/utilities');
-  islandora_drupal_dataimporthandler_notifier_poke_handlers($node);
+  islandora_drupal_dataimporthandler_notifier_add_shutdown_handler();
+}
+
+/**
+ * Implements hook_user_update().
+ */
+function islandora_drupal_dataimporthandler_notifier_user_update(&$edit, $account, $cat) {
+  module_load_include('inc', 'islandora_drupal_dataimporthandler_notifier', 'includes/utilities');
+  islandora_drupal_dataimporthandler_notifier_add_shutdown_handler();
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function islandora_drupal_dataimporthandler_notifier_user_insert(&$edit, $account, $cat) {
+  module_load_include('inc', 'islandora_drupal_dataimporthandler_notifier', 'includes/utilities');
+  islandora_drupal_dataimporthandler_notifier_add_shutdown_handler();
 }
 
 /**
