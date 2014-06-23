@@ -31,7 +31,7 @@ function islandora_drupal_dataimporthandler_notifier_poke_handlers() {
  * into the shutdown handler.
  */
 function islandora_drupal_dataimporthandler_notifier_add_shutdown_handler() {
-  static $set = FALSE;
+  $set =& drupal_static(__FUNCTION__, FALSE);
 
   if (!$set) {
     $set = TRUE;
