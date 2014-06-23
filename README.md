@@ -16,11 +16,11 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 ## Configuration
 
-We assume that a handler has already been configure in Solr... For the [basic-solr-config](https://github.com/discoverygarden/basic-solr-config), one should simply be able to uncomment the [request handler definition in the solrconfig.xml](https://github.com/discoverygarden/basic-solr-config/blob/2ef010e425804f7d14089a898da905d136c9895d/conf/solrconfig.xml#L613-L619) (and likely restart Solr).
+We assume that a handler has already been configured in Solr... For the [basic-solr-config](https://github.com/discoverygarden/basic-solr-config), one should simply be able to uncomment the [request handler definition in the solrconfig.xml](https://github.com/discoverygarden/basic-solr-config/blob/2ef010e425804f7d14089a898da905d136c9895d/conf/solrconfig.xml#L613-L619) (and likely restart Solr).
 
 Enable the relevant DataImportHandlers as necessary as `admin/islandora/search/islandora_solr/drupal_notifier`.
 
-For an additional ensurance of index consistency, it may be desirable to add a cron job to regularly make the DataImportHandler poll Drupal. Drupal uses DB transactions when saving node content, so we have to somehow make trigger to Solr after the DB is actually updated. Additionally, if an import is already in progress, it is not clearly specified what will happen; assuming the command will be ignore, it is recommended to add a cron job like the following to ensure eventual consistency:
+For an additional ensurance of index consistency, it may be desirable to add a cron job to regularly make the DataImportHandler poll Drupal. Drupal uses DB transactions when saving node content, so we have to somehow make trigger to Solr after the DB is actually updated. Additionally, if an import is already in progress, it is not clearly specified what will happen; assuming the command will be ignored, it is recommended to add a cron job like the following to ensure eventual consistency:
 ```bash
 # Make Solr's DataImportHandler poll Drupal for updated content every 5 minutes.
 */5 * * * * /usr/bin/wget -O /dev/null "http://localhost:8080/solr/dataimport?command=full-import&clean=false"
