@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * (Un)installation hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_drupal_dataimporthandler_notifier_uninstall() {
+  $vars = array(
+    'islandora_drupal_dataimporthandler_notifier_handlers',
+  );
+  array_map('variable_del', $vars);
+}
