@@ -20,7 +20,9 @@ function islandora_drupal_dataimporthandler_notifier_admin_form($form, &$form_st
     '#header' => array(
       'handler_suffix' => t('Handler suffix/Route'),
     ),
-    '#options' => array_combine($handler_keys, array_map($map_handlers_to_options, $handlers, $handler_keys)),
+    '#options' => (empty($handler_keys) ?
+      array() :
+      array_combine($handler_keys, array_map($map_handlers_to_options, $handlers, $handler_keys))),
     '#default_value' => variable_get('islandora_drupal_dataimporthandler_notifier_handlers', array()),
   );
 
