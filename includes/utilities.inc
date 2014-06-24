@@ -11,7 +11,7 @@
 function islandora_drupal_dataimporthandler_notifier_poke_handlers() {
   module_load_include('inc', 'islandora_solr', 'includes/luke');
   $solr_url = islandora_solr_check_http(variable_get('islandora_solr_url', 'localhost:8080/solr'));
-  foreach (variable_get('islandora_drupal_dataimporthandler_notifier_handlers', array()) as $handler_path_suffix) {
+  foreach (array_filter(variable_get('islandora_drupal_dataimporthandler_notifier_handlers', array())) as $handler_path_suffix) {
     $url = url("$solr_url$handler_path_suffix", array(
       'query' => array(
         'command' => 'full-import',
